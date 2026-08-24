@@ -20,7 +20,7 @@ Material Design 3 的跨平台番茄鐘，用 Flutter 寫，一套程式碼跑 *
 
 ## 執行
 
-需要 Flutter 3.24 以上（Dart 3.5+）。
+需要 Flutter 3.24 以上（Dart 3.5+）。開發時實測過的版本是 **Flutter 3.47.1 / Dart 3.13.1**。
 
 ```bash
 cd app
@@ -35,7 +35,7 @@ flutter run -d chrome  # 或指定平台：chrome / windows / macos / linux / <d
 
 > 倉庫只放跨平台的 Dart 原始碼，平台資料夾由 `flutter create .` 產生，這樣不必把各平台的 Gradle / Xcode 樣板檔一起版控。`flutter create .` 不會覆蓋既有的 `lib/`、`test/` 與 `pubspec.yaml` 內容。
 
-測試：
+測試（9 個：計時邏輯 5 個 + 畫面 4 個）：
 
 ```bash
 cd app && flutter test
@@ -49,6 +49,12 @@ flutter build windows      # Windows
 flutter build macos        # macOS
 flutter build web          # Web
 ```
+
+> Web 版預設會從 Google 的 CDN 抓 CanvasKit 與中文備援字型。若部署環境連不到外網，改用 `flutter build web --release --no-web-resources-cdn` 把 CanvasKit 打包進去；中文字型則需要自行 bundle 一份 Noto Sans TC 到 `pubspec.yaml` 的 assets。
+
+## 驗證狀態
+
+以 Flutter 3.47.1 實測：`flutter analyze` 無任何問題、`flutter test` 9 項全過、`flutter build web --release` 編譯成功，並在無頭 Chromium 裡實際跑過（淺色／深色、階段換色、圓環推進都正確）。
 
 ## 專案結構
 

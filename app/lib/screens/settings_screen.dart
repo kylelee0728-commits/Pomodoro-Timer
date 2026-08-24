@@ -25,27 +25,30 @@ class SettingsScreen extends StatelessWidget {
           body: ListView(
             padding: const EdgeInsets.symmetric(vertical: 8),
             children: [
-              _SectionHeader('時間長度'),
+              const _SectionHeader('時間長度'),
               _MinuteSlider(
                 label: '專注',
                 value: settings.focusMinutes,
                 min: 5,
                 max: 90,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(focusMinutes: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(focusMinutes: v)),
               ),
               _MinuteSlider(
                 label: '短休息',
                 value: settings.shortBreakMinutes,
                 min: 1,
                 max: 30,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(shortBreakMinutes: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(shortBreakMinutes: v)),
               ),
               _MinuteSlider(
                 label: '長休息',
                 value: settings.longBreakMinutes,
                 min: 5,
                 max: 60,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(longBreakMinutes: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(longBreakMinutes: v)),
               ),
               _MinuteSlider(
                 label: '幾個番茄後長休息',
@@ -53,42 +56,49 @@ class SettingsScreen extends StatelessWidget {
                 min: 2,
                 max: 8,
                 unit: '個',
-                onChanged: (v) => onSettingsChanged(settings.copyWith(longBreakInterval: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(longBreakInterval: v)),
               ),
               const Divider(height: 32),
-              _SectionHeader('自動接續'),
+              const _SectionHeader('自動接續'),
               SwitchListTile(
                 title: const Text('專注結束後自動開始休息'),
                 value: settings.autoStartBreaks,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(autoStartBreaks: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(autoStartBreaks: v)),
               ),
               SwitchListTile(
                 title: const Text('休息結束後自動開始專注'),
                 value: settings.autoStartFocus,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(autoStartFocus: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(autoStartFocus: v)),
               ),
               const Divider(height: 32),
-              _SectionHeader('提示與外觀'),
+              const _SectionHeader('提示與外觀'),
               SwitchListTile(
                 title: const Text('提示音'),
                 value: settings.playSound,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(playSound: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(playSound: v)),
               ),
               SwitchListTile(
                 title: const Text('震動回饋'),
                 subtitle: const Text('行動裝置適用'),
                 value: settings.haptics,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(haptics: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(haptics: v)),
               ),
               SwitchListTile(
                 title: const Text('跟隨系統動態色彩'),
                 subtitle: const Text('關閉時，配色會隨階段變換'),
                 value: settings.dynamicColor,
-                onChanged: (v) => onSettingsChanged(settings.copyWith(dynamicColor: v)),
+                onChanged: (v) =>
+                    onSettingsChanged(settings.copyWith(dynamicColor: v)),
               ),
               const Divider(height: 32),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 child: FilledButton.tonalIcon(
                   onPressed: () {
                     controller.resetCycle();

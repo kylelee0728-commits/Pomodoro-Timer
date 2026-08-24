@@ -42,9 +42,12 @@ class PomodoroSettings {
   }) {
     return PomodoroSettings(
       focusMinutes: _clamp(focusMinutes ?? this.focusMinutes, 1, 180),
-      shortBreakMinutes: _clamp(shortBreakMinutes ?? this.shortBreakMinutes, 1, 60),
-      longBreakMinutes: _clamp(longBreakMinutes ?? this.longBreakMinutes, 1, 120),
-      longBreakInterval: _clamp(longBreakInterval ?? this.longBreakInterval, 1, 12),
+      shortBreakMinutes:
+          _clamp(shortBreakMinutes ?? this.shortBreakMinutes, 1, 60),
+      longBreakMinutes:
+          _clamp(longBreakMinutes ?? this.longBreakMinutes, 1, 120),
+      longBreakInterval:
+          _clamp(longBreakInterval ?? this.longBreakInterval, 1, 12),
       autoStartBreaks: autoStartBreaks ?? this.autoStartBreaks,
       autoStartFocus: autoStartFocus ?? this.autoStartFocus,
       playSound: playSound ?? this.playSound,
@@ -53,5 +56,6 @@ class PomodoroSettings {
     );
   }
 
-  static int _clamp(int value, int min, int max) => math.max(min, math.min(max, value));
+  static int _clamp(int value, int min, int max) =>
+      math.max(min, math.min(max, value));
 }

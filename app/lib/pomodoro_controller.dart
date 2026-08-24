@@ -37,7 +37,8 @@ class PomodoroController extends ChangeNotifier {
   Duration get remaining => _remaining;
 
   /// Where the current focus session sits inside the long-break cycle, 1-based.
-  int get positionInCycle => (_completedFocusSessions % _settings.longBreakInterval) + 1;
+  int get positionInCycle =>
+      (_completedFocusSessions % _settings.longBreakInterval) + 1;
 
   double get progress {
     final total = durationFor(_phase).inMilliseconds;
@@ -55,8 +56,10 @@ class PomodoroController extends ChangeNotifier {
 
   Duration durationFor(PomodoroPhase phase) => switch (phase) {
         PomodoroPhase.focus => Duration(minutes: _settings.focusMinutes),
-        PomodoroPhase.shortBreak => Duration(minutes: _settings.shortBreakMinutes),
-        PomodoroPhase.longBreak => Duration(minutes: _settings.longBreakMinutes),
+        PomodoroPhase.shortBreak =>
+          Duration(minutes: _settings.shortBreakMinutes),
+        PomodoroPhase.longBreak =>
+          Duration(minutes: _settings.longBreakMinutes),
       };
 
   void updateSettings(PomodoroSettings settings) {
@@ -141,9 +144,10 @@ class PomodoroController extends ChangeNotifier {
     if (_phase == PomodoroPhase.focus) {
       if (countFocusSession) _completedFocusSessions++;
 
-      final dueForLongBreak =
-          countFocusSession && _completedFocusSessions % _settings.longBreakInterval == 0;
-      _phase = dueForLongBreak ? PomodoroPhase.longBreak : PomodoroPhase.shortBreak;
+      final dueForLongBreak = countFocusSession &&
+          _completedFocusSessions % _settings.longBreakInterval == 0;
+      _phase =
+          dueForLongBreak ? PomodoroPhase.longBreak : PomodoroPhase.shortBreak;
     } else {
       _phase = PomodoroPhase.focus;
     }

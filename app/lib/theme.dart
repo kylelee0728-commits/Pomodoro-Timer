@@ -24,7 +24,8 @@ ColorScheme buildScheme({
     return dynamicScheme.harmonized();
   }
 
-  return ColorScheme.fromSeed(seedColor: seedFor(phase), brightness: brightness);
+  return ColorScheme.fromSeed(
+      seedColor: seedFor(phase), brightness: brightness);
 }
 
 ThemeData buildTheme(ColorScheme scheme) => ThemeData(

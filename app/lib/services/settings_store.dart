@@ -27,10 +27,14 @@ class SettingsStore {
   Future<void> save(PomodoroSettings settings) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setInt('${_keyPrefix}focusMinutes', settings.focusMinutes);
-    await prefs.setInt('${_keyPrefix}shortBreakMinutes', settings.shortBreakMinutes);
-    await prefs.setInt('${_keyPrefix}longBreakMinutes', settings.longBreakMinutes);
-    await prefs.setInt('${_keyPrefix}longBreakInterval', settings.longBreakInterval);
-    await prefs.setBool('${_keyPrefix}autoStartBreaks', settings.autoStartBreaks);
+    await prefs.setInt(
+        '${_keyPrefix}shortBreakMinutes', settings.shortBreakMinutes);
+    await prefs.setInt(
+        '${_keyPrefix}longBreakMinutes', settings.longBreakMinutes);
+    await prefs.setInt(
+        '${_keyPrefix}longBreakInterval', settings.longBreakInterval);
+    await prefs.setBool(
+        '${_keyPrefix}autoStartBreaks', settings.autoStartBreaks);
     await prefs.setBool('${_keyPrefix}autoStartFocus', settings.autoStartFocus);
     await prefs.setBool('${_keyPrefix}playSound', settings.playSound);
     await prefs.setBool('${_keyPrefix}haptics', settings.haptics);

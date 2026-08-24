@@ -1,5 +1,4 @@
 import 'dart:math' as math;
-import 'dart:ui' show FontFeature;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,7 +46,8 @@ class _TimerScreenState extends State<TimerScreen> {
     final message = switch (next) {
       PomodoroPhase.focus => '休息結束，開始下一個 ${settings.focusMinutes} 分鐘的專注。',
       PomodoroPhase.shortBreak => '番茄完成！休息 ${settings.shortBreakMinutes} 分鐘。',
-      PomodoroPhase.longBreak => '番茄完成！長休息 ${settings.longBreakMinutes} 分鐘，走遠一點。',
+      PomodoroPhase.longBreak =>
+        '番茄完成！長休息 ${settings.longBreakMinutes} 分鐘，走遠一點。',
     };
 
     ScaffoldMessenger.of(context)
@@ -114,56 +114,67 @@ class _TimerScreenState extends State<TimerScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final ringSize = math.min(
-              320.0,
-              math.min(constraints.maxWidth - 64, constraints.maxHeight - 260),
-            ).clamp(180.0, 320.0);
+            final ringSize = math
+                .min(
+                  320.0,
+                  math.min(
+                      constraints.maxWidth - 64, constraints.maxHeight - 260),
+                )
+                .clamp(180.0, 320.0);
 
             return SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(24, 8, 24, 32),
-              child: Column(
-                children: [
-                  Text(
-                    title,
-                    style: theme.textTheme.titleLarge?.copyWith(
-                      color: accent,
-                      fontWeight: FontWeight.w600,
+              child: ConstrainedBox(
+                // Centre the column on a tall window, but let it scroll on a
+                // short one instead of overflowing.
+                constraints:
+                    BoxConstraints(minHeight: constraints.maxHeight - 40),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      title,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: accent,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(hint, style: theme.textTheme.bodyMedium?.copyWith(
-                    color: scheme.onSurfaceVariant,
-                  )),
-                  const SizedBox(height: 28),
-                  SizedBox(
-                    width: ringSize,
-                    height: ringSize,
-                    child: ProgressRing(
-                      value: controller.progress,
-                      color: accent,
-                      trackColor: scheme.surfaceContainerHighest,
-                      thickness: 18,
-                      child: Text(
-                        controller.timeLabel,
-                        style: theme.textTheme.displayLarge?.copyWith(
-                          fontWeight: FontWeight.w300,
-                          fontFeatures: const [FontFeature.tabularFigures()],
+                    const SizedBox(height: 4),
+                    Text(hint,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: scheme.onSurfaceVariant,
+                        )),
+                    const SizedBox(height: 28),
+                    SizedBox(
+                      width: ringSize,
+                      height: ringSize,
+                      child: ProgressRing(
+                        value: controller.progress,
+                        color: accent,
+                        trackColor: scheme.surfaceContainerHighest,
+                        thickness: 18,
+                        child: Text(
+                          controller.timeLabel,
+                          style: theme.textTheme.displayLarge?.copyWith(
+                            fontWeight: FontWeight.w300,
+                            fontFeatures: const [FontFeature.tabularFigures()],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 28),
-                  _CycleDots(controller: controller, accent: accent),
-                  const SizedBox(height: 8),
-                  Text(
-                    '今天已完成 ${controller.completedFocusSessions} 個番茄',
-                    style: theme.textTheme.bodySmall?.copyWith(
-                      color: scheme.onSurfaceVariant,
+                    const SizedBox(height: 28),
+                    _CycleDots(controller: controller, accent: accent),
+                    const SizedBox(height: 8),
+                    Text(
+                      '今天已完成 ${controller.completedFocusSessions} 個番茄',
+                      style: theme.textTheme.bodySmall?.copyWith(
+                        color: scheme.onSurfaceVariant,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  _Controls(controller: controller),
-                ],
+                    const SizedBox(height: 24),
+                    _Controls(controller: controller),
+                  ],
+                ),
               ),
             );
           },
