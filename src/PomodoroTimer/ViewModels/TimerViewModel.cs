@@ -271,7 +271,7 @@ public partial class TimerViewModel : ObservableObject
         RefreshClock();
     }
 
-    private void OnTick(object? sender, object e)
+    private void OnTick(object sender, object e)
     {
         _remaining = _deadline - DateTimeOffset.Now;
 
