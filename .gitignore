@@ -1,0 +1,10 @@
+bin/
+obj/
+.vs/
+*.user
+AppPackages/
+BundleArtifacts/
+*.appx
+*.msix
+*.msixbundle
+*.pfx
